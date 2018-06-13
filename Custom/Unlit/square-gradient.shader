@@ -41,12 +41,18 @@ Shader "Custom/Unlit/square-gradiant-quad-plane"
 			
 			float4 frag (v2f i) : SV_Target
 			{
+				// Left
 				float pct1x = i.uv.x * 2.0;
+				// Bottom
 				float pct1y = i.uv.y * 2.0;
+				// Combine Left and Bottom
 				float pct1 = pct1x * pct1y;
 
+				// Right
 				float pct2x = (1.0 - i.uv.x) * 2.0;
+				// Top
 				float pct2y = (1.0 - i.uv.y) * 2.0;
+				// Combine with Bottom Left
 				pct1 = mul(pct1, pct2x * pct2y);
 
 				float3 color = (pct1, pct1, pct1);
