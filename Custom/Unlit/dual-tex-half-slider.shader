@@ -83,7 +83,7 @@ Shader "Custom/dual-tex-half-slider"
 					}
 
 
-					if( i.localPos.x < _MiddlePoint )
+					if( i.uv.x < _MiddlePoint )
 					{
 						return tex2D( _LeftTex, i.uv );
 					}
