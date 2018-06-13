@@ -70,7 +70,7 @@ Shader "Custom/dual-tex-half-slider"
 				float mixFactor = 1.0 - ((_MiddlePoint - i.uv.x) + 0.2) / 0.4;
 				return (tex2D(_LeftTex, i.uv) * less_than(i.uv.x, _MiddlePoint) * gte(distanceFromMiddlePoint, 0.2)) + (tex2D(_RightTex, i.uv2) * greater_than(i.uv.x, _MiddlePoint) * gte(distanceFromMiddlePoint, 0.2)) + (lerp(tex2D(_LeftTex, i.uv), tex2D(_RightTex, i.uv2), mixFactor) * less_than(distanceFromMiddlePoint, 0.2));
 				
-				/ * Everything in frag above is literally what is commented below. Conditionals are bad in shaders.
+				/* Everything in frag above is literally what is commented below. Conditionals are bad in shaders.
 					fixed distanceFromMiddlePoint = _MiddlePoint - i.localPos.x;
 	
 					if( abs(distanceFromMiddlePoint) < 0.2 )
@@ -88,7 +88,7 @@ Shader "Custom/dual-tex-half-slider"
 					{
 						return tex2D( _RightTex, i.uv2 );
 					}
-				* /
+				*/
 			}
 			ENDCG
 		}
