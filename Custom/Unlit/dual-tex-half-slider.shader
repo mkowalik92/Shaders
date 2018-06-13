@@ -29,7 +29,6 @@ Shader "Custom/dual-tex-half-slider"
 				float4 vertex : SV_POSITION;
 				float2 uv : TEXCOORD0;
 				float2 uv2 : TEXCOORD1;
-				float2 localPos : TEXCOORD2;
 			};
 
 			sampler2D _LeftTex;
@@ -44,10 +43,15 @@ Shader "Custom/dual-tex-half-slider"
 				return max(sign(y - x), 0.0);
 			}
 
-			float greater_than(float x, float y)
+			float greater_than (float x, float y)
 			{
 				return max(sign(x - y), 0.0);
-			}	
+			}
+
+			float gte (float x, float y)
+			{
+				return 1.0 - less_than(x, y);
+			}
 			
 			v2f vert (appdata i)
 			{
@@ -55,14 +59,16 @@ Shader "Custom/dual-tex-half-slider"
 				o.vertex = UnityObjectToClipPos(i.vertex);
 				o.uv = TRANSFORM_TEX(i.uv, _LeftTex);
 				o.uv2 = TRANSFORM_TEX(i.uv, _RightTex);
-				o.localPos = i.uv.xy + float2(0.5, 0.5); // uv is -0.5 <-> 0.5 this makes it 0 <-> 1
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				return (tex2D(_LeftTex, i.uv) * less_than(i.uv.x, _MiddlePoint)) + (tex2D(_RightTex, i.uv) * greater_than(i.uv.x, _MiddlePoint));
-
+				float distanceFromMiddlePoint = abs(_MiddlePoint - i.uv.x);
+				float mixFactor = 1.0 - ((_MiddlePoint - i.uv.x) + 0.2) / 0.4;
+				return (tex2D(_LeftTex, i.uv) * less_than(i.uv.x, _MiddlePoint) * gte(distanceFromMiddlePoint, 0.2)) + (tex2D(_RightTex, i.uv2) * greater_than(i.uv.x, _MiddlePoint) * gte(distanceFromMiddlePoint, 0.2)) + (lerp(tex2D(_LeftTex, i.uv), tex2D(_RightTex, i.uv2), mixFactor) * less_than(distanceFromMiddlePoint, 0.2));
 			}
 			ENDCG
 		}
+	}
+}
