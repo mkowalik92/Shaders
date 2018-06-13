@@ -1,8 +1,8 @@
 /*
-Square Gradient Shader Example for quads/planes
+//Square Gradient Shader Example for quads/planes
 
-Marek Kowalik
-Free to use anywhere. Credit appreciated, but not necessary.
+//Marek Kowalik
+//Free to use anywhere. Credit appreciated, but not necessary.
 Made with help from: https://thebookofshaders.com by converting GLSL to HLSL
 */
 
