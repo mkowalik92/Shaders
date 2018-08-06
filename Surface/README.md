@@ -1,2 +1,2 @@
 # Surface Shaders
-# Mostly just me trying to recreate waveworks and creating an ocean simulation
+# Mostly just me trying to recreate nvidia waveworks/creating an ocean simulation in unity
