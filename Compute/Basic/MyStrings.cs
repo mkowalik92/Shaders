@@ -1,3 +1,5 @@
+// Just used for holding public const string values (slightly improves performance compared to variables)
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
