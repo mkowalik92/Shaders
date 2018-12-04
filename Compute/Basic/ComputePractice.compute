@@ -1,0 +1,11 @@
+// Returns a 2D texture filled with red
+
+#pragma kernel FillWithRed
+
+RWTexture2D<float4> result;
+
+[numthreads(1, 1, 1)]
+void FillWithRed (uint3 dtid : SV_DispatchThreadID)
+{
+	result[dtid.xy] = float4(1, 0, 0, 1);
+}
