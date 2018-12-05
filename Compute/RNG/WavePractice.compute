@@ -18,7 +18,7 @@ uint rand_xorshift ()
 [numthreads(1, 1, 1)]
 void FillWithRandom (uint3 dtid : SV_DispatchThreadID)
 {
-	rng_state = dtid.x * dtid.y;
+	rng_state = dtid.x * dtid.y; // Seed with thread id
 
 	uint r0 = rand_xorshift();
 	uint r1 = rand_xorshift();
